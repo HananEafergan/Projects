@@ -12,6 +12,7 @@ import { Weather, WeatherDTO } from '../shared/weather.model';
 export class AppComponent {
   title = 'WeatherApp';
   result: Weather[] = [];
+  cityArr: string[] = ['Ramat Gan', 'Tel Aviv', 'Moscow', 'Toronto', 'Detroit', 'Paris'];
   weatherForm: FormGroup = this.formBuilder.group({
     cityWeather: this.formBuilder.array([this.getForm()])
   })
