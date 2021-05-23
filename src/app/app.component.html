@@ -1,0 +1,45 @@
+<div class="container">
+    <form [formGroup]="weatherForm">
+        <ng-container formArrayName="cityWeather">
+            <ng-container *ngFor="let item of cityWeather.controls; let i = index">
+                <div class="form-group" [formGroupName]="i">
+                    <div>
+                        <select formControlName="city" name="city" class="form-control">
+                            <option selected disabled value="">Select City</option>
+                            <option value="Ramat Gan">Ramat Gan</option>
+                            <option value="Tel Aviv">Tel Aviv</option>
+                            <option value="Detroit">Detroit</option>
+                            <option value="Toronto">Toronto</option>
+                            <option value="Paris">Paris</option>
+                            <option value="Moscow">Moscow</option>
+                        </select>
+                        <span
+                            *ngIf="cityWeather.controls[i].get('city')?.invalid && cityWeather.controls[i].get('city')?.touched">Please
+                            select a city!</span>
+                    </div>
+                    <div>
+                        <input formControlName="unit"
+                            placeholder="Please insert a unit (metric, imperial) default: standard" class="form-control"
+                            type="text">
+                    </div>
+                    <span
+                        *ngIf="cityWeather.controls[i].get('unit')?.invalid && cityWeather.controls[i].get('unit')?.touched">Please
+                        insert a unit!</span>
+                </div>
+                <div *ngIf="result[i]">
+                    <p>{{result[i].temp}}{{getTempUnit(i)}}</p>
+                    <p>{{result[i].main}}</p>
+                    <img [src]="getIcon(i)" alt="">
+                </div>
+                <button [ngClass]="{'disabled' : cityWeather.controls[i].invalid}" class="btn btn-primary"
+                    (click)="addCity(i)">Add city</button>
+                <button *ngIf="cityWeather.controls.length > 1" class="btn btn-danger" (click)="removeCity(i)">Remove
+                    city</button>
+            </ng-container>
+        </ng-container>
+    </form>
+    <ul *ngFor="item of result; let i = index">
+        <li>{{i+1}}. {{result[i].city}}, {{result[i].temp}}{{getTempUnit(i)}}, {{result[i].main}} <img
+                [src]="getIcon(i)" alt=""></li>
+    </ul>
+</div>
