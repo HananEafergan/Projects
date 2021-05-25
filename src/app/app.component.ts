@@ -36,7 +36,7 @@ export class AppComponent {
     const city = (this.cityWeather.controls[i] as FormGroup).controls.city.value;
     const unit = (this.cityWeather.controls[i] as FormGroup).controls.unit.value;
     this.httpClient.get("http://api.openweathermap.org/data/2.5/weather?q=" + city
-      + "&APPID=d7065f5c2ec83481abbbdabfb3792687&units=" + unit).subscribe(data => {
+      + "&APPID=0d7303c17ee3d3482cd82a2ad273a90d&units=" + unit).subscribe(data => {
         this.result.push(
           {
             city: (data as WeatherDTO).name,
